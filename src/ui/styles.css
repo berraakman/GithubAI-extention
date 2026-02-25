@@ -2,8 +2,8 @@
   position: fixed;
   top: 100px;
   right: 24px;
-  width: 340px;
-  background: #ffffff;
+  width: 400px;
+  background: #c7def5;
   border: 1px solid #d0d7de;
   border-radius: 12px;
   padding: 16px;
@@ -12,20 +12,75 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   /* Yumuşatılmış şık gölge */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: aiPanelSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes aiPanelSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .ai-panel-container h3 {
   margin: 0 0 16px 0;
   font-size: 15px;
   font-weight: 600;
-  border-bottom: 1px solid #eaeef2;
+  border-bottom: 1px solid #bcc0c5;
   padding-bottom: 14px;
-  color: #0969da;
-  /* GitHub mavi tonu başlık */
+  color: #0c2340;
+  /* Navy Blue başlık */
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: grab;
+  user-select: none;
+}
+
+.ai-panel-container h3:active {
+  cursor: grabbing;
+}
+
+.ai-header-title {
+  flex-grow: 1;
+}
+
+.ai-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #57606a;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.ai-toggle-btn:hover {
+  color: #0969da;
+  background: rgba(9, 105, 218, 0.1);
+}
+
+.ai-panel-minimized {
+  padding-bottom: 16px !important;
+}
+
+.ai-panel-minimized h3 {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .ai-actions {
@@ -39,7 +94,7 @@
   align-items: center;
   width: 100%;
   padding: 10px 14px;
-  background: #f6f8fa;
+  background: #ecf2f9;
   border: 1px solid #d0d7de;
   border-radius: 8px;
   color: #24292f;
@@ -53,16 +108,20 @@
 .ai-action-btn:hover {
   background: #e9ecef;
   /* Hover gri ton daha belirgin */
-  border-color: #0969da;
-  /* Hoverda mavi border */
-  color: #0969da;
-  transform: translateY(-1px);
+  border-color: #0c2340;
+  color: #0c2340;
+  transform: translateY(-1.5px);
   /* Yukari dogru zarif hover efekti */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.ai-action-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .ai-btn-primary {
-  background: #1f883d;
+  background: #1f4788;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -72,14 +131,20 @@
   font-weight: 600;
   padding: 12px;
   box-shadow: 0 4px 12px rgba(31, 136, 61, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ai-btn-primary:hover {
-  background: #1a7f37;
+  background: #376395;
   color: #ffffff;
   border: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(31, 136, 61, 0.3);
+  transform: translateY(-2.5px);
+  box-shadow: 0 8px 18px rgba(31, 40, 136, 0.35);
+}
+
+.ai-btn-primary:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 2px 8px rgba(31, 40, 136, 0.25);
 }
 
 .ai-result-view {
@@ -87,6 +152,26 @@
   font-size: 13.5px;
   max-height: 420px;
   overflow-y: auto;
+  padding-right: 4px;
+  /* Scrollbar boslugu icin */
+}
+
+/* Scrollbar gorseli iyilestirme */
+.ai-result-view::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ai-result-view::-webkit-scrollbar-thumb {
+  background: #d4dde7;
+  border-radius: 4px;
+}
+
+.ai-result-view::-webkit-scrollbar-thumb:hover {
+  background: #5a789a;
+}
+
+.ai-result-view::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .ai-result-view:empty {
@@ -108,8 +193,21 @@
   line-height: 1.5;
   margin: 0;
   word-break: break-word;
-  box-shadow: inset 0 0 0 1px #d0d7de;
+  box-shadow: inset 0 0 0 1px #d0d7de, 0 4px 12px rgba(0, 0, 0, 0.03);
   font-size: 14px;
+  animation: aiResultFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes aiResultFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 div.ai-markdown-body {
@@ -173,7 +271,7 @@ div.ai-markdown-body {
 
 
 .ai-loader {
-  color: #0969da;
+  color: #033977;
   font-weight: 500;
   text-align: center;
   padding: 14px;

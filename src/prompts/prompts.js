@@ -8,21 +8,21 @@ window.AIPrompts = {
                 return `Explain the following code briefly. Do not write unnecessarily long analysis.\n\nCode:\n${payload}`;
 
             case 'quality':
-                return `Analyze the code quality. ${formatInstructionCheck}
+                return `Analyze the code quality. Use Markdown list format strictly. ${formatInstructionCheck}
         
-Overall Score: [0-100]
-Readability: [Low / Medium / High]
-Maintainability: [Low / Medium / High]
-Main Issue: [brief explanation]
+- **Overall Score**: [0-100]
+- **Readability**: [Low / Medium / High]
+- **Maintainability**: [Low / Medium / High]
+- **Main Issue**: [brief explanation]
 
 Code:
 ${payload}`;
 
             case 'security':
-                return `Analyze the given code for security. Select ONLY the most critical risk. ${formatInstructionCheck}
+                return `Analyze the given code for security. Select ONLY the most critical risk. Use Markdown list format strictly. ${formatInstructionCheck}
 
-Risk Level: [Low / Medium / High]
-Main Risk: [brief explanation]
+- **Risk Level**: [Low / Medium / High]
+- **Main Risk**: [brief explanation]
 
 Code:
 ${payload}`;
