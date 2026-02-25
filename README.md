@@ -1,57 +1,81 @@
 # 🤖 GitHub AI Code Assistant
 
-A Chrome extension that integrates a powerful AI assistant directly into GitHub's interface. Seamlessly analyze your repositories and understand code without ever leaving your browser. 
+Bu proje, kod okuma ve repository analiz etme süreçlerini hızlandırmak için geliştirilmiş, doğrudan GitHub arayüzüne entegre olan **Yapay Zeka (LLM) Destekli bir Chrome Eklentisidir.**
 
-Designed with a modular architecture in **Vanilla JS** (Manifest V3) and offering a clean, native GitHub look-and-feel.
+Tamamen **Vanilla JS** (React veya Vue gibi frameworkler kullanılmadan) ve **Manifest V3** standartlarına uygun, modüler bir mimariyle kodlanmıştır.
 
-## 🌟 Features
+---
 
-### 1. File Mode (Code Analysis)
-When viewing any code file on GitHub, a draggable, lightweight AI panel appears on the right. You get instant access to four key actions:
-- **🔍 Explain Code**: Instantly get a brief summary of what the code does.
-- **📊 Code Quality Score**: Receive a score out of 100 with readability and maintainability assessments.
-- **🛡 Security Check**: Quickly identify critical security risks in the file.
-- **🔧 Refactor Suggestion**: Get 2-3 actionable tips to improve the code.
+## 🌟 Temel Özellikler (Modlar)
 
-### 2. Repo Mode (Repository Analysis)
-On the homepage of any repository, use the **🔎 Analyze Repository** button to get a quick overview:
-- Project type & overall quality score.
-- Key strengths and weaknesses extracted dynamically from the file tree.
-- A fast summary based on a dynamic sampling of repository files, keeping processing light and fast.
+Eklenti, GitHub üzerinde iki farklı sayfada otomatik olarak devreye girer:
 
-## 🚀 Model Integrations
-The extension is built to be flexible and supports multiple AI providers:
-- **Ollama Local**: Run the extension entirely locally on your machine with zero latency (e.g. `llama3` or `gpt-oss:120b-cloud`).
-- **Ollama Cloud / Open OSS**: Use cloud-hosted open-source models via platforms like OpenRouter.
-- **OpenAI (Fallback)**: Seamlessly fall back to OpenAI API if your local server is unreachable.
+### 1. Dosya Modu (File Mode)
+GitHub üzerinde incelediğiniz herhangi bir kod dosyasının (`.js`, `.py`, `.go` vb.) içine girdiğinizde sağ tarafta sürüklenebilir (draggable) ve küçültülebilir (minimize) estetik bir AI Asistan paneli açılır. Bu panel üzerinden şu 4 işlevi gerçekleştirebilirsiniz:
 
-## 🛠️ Installation
+- **🔍 Kod Açıklaması (Explain Code):** Anlamadığınız karmaşık bir dosyayı saniyeler içinde analiz edip "Bu kod ne işe yarıyor?" sorusunu sizin için kısaca özetler.
+- **📊 Kod Kalite Puanı (Quality Score):** Yazılan koda 100 üzerinden bir kalite puanı verir. "Okunabilirlik" ve "Sürdürülebilirlik" düzeylerini ölçüp asıl problemi (Main Issue) sizin için bulup gösterir.
+- **🛡 Güvenlik Testi (Security Check):** İncelenen dosyadaki olası kritik güvenlik açıklarını tespit edip risk seviyesini (Düşük/Orta/Yüksek) belirler.
+- **🔧 Yeniden Düzenleme Önerisi (Refactor Suggestion):** Spagetti veya yavaş çalışabilecek kod parçalarını nasıl daha temiz (Clean Code) ve hızlı hale getirebileceğinizle ilgili 2-3 maddelik öneriler (ve kod parçacıkları) sunar.
 
-1. Clone or download this repository to your local machine:
+### 2. Repo Modu (Repo Mode)
+Bir GitHub projesinin ana sayfasına girdiğinizde dizinlerin hemen üstünde **🔎 Analyze Repository** isimli yeşil bir buton belirir. 
+Bu buton, repodaki örnek dosyaların ağacını hızlıca analiz edip LLM'e yollar ve size projenin genel kalitesini, güçlü yanlarını ve zayıf/eksik (örn. CI/CD eksikliği, test eksikliği vb.) yönlerini maddeler halinde sunar.
+
+---
+
+## 🚀 Desteklenen Yapay Zeka Modelleri
+
+Eklentiyi kullanırken arkada çalışacak beyni (LLM sağlayıcısını) esnek bir şekilde değiştirebilirsiniz:
+
+1. **Ollama Local (Önerilen):** Tamamen ücretsiz ve internetsiz şekilde kendi bilgisayarınızda çalışan modeller. (Örn: `llama3`, `gpt-oss:120b-cloud` vb.)
+2. **OSS Cloud (OpenRouter vs.):** Bulut tabanlı Llama, Mixtral, Qwen vb. Açık kaynak kodlu LLM sunucularına bağlanma yeteneği.
+3. **OpenAI (Fallback):** Eğer Ollama sunucusuna bağlanılamazsa otomatik olarak arka planda ChatGPT (`gpt-3.5-turbo`) API'sine düşme özelliği.
+
+---
+
+## 🛠️ Kurulum Adımları
+
+Eklentiyi bilgisayarınıza kurup Chrome veya Chromium tabanlı bir tarayıcıda çalıştırmak çok basittir:
+
+1. Bu depoyu (repository) bilgisayarınıza indirin veya klonlayın:
    ```bash
    git clone https://github.com/berraakman/GithubAI-extention.git
    ```
-2. Open Chrome (or any Chromium-based browser like Brave/Edge) and go to `chrome://extensions/`.
-3. Enable **Developer mode** in the top right corner.
-4. Click **Load unpacked** and select the folder containing this extension.
-5. You're ready! Go to GitHub and look for the new buttons.
+2. Chrome tarayıcınızı açın ve adres çubuğuna şunu yazın: `chrome://extensions/`
+3. Sağ üst köşeden **Geliştirici modu (Developer mode)** seçeneğini aktif hale getirin.
+4. Sol üstten **Paketlenmemiş öğe yükle (Load unpacked)** butonuna tıklayın.
+5. Bilgisayarınıza bağladığınız `GithubAI-extention` klasörünü seçin.
 
-## 🔧 Configuration
-You can customize the model limits, keys, and providers by editing the `src/config/config.js` file:
-- Select your default `provider` (`ollama_local`, `ollama_cloud`, `openai`, `oss_cloud`).
-- Set your **OpenAI** or **OpenRouter API Key** if needed.
-- Define what local Ollama model to invoke (e.g. `gpt-oss:120b-cloud`).
+Tebrikler! Kurulum tamamlandı. Artık herhangi bir GitHub sayfasına giderek eklentiyi deneyebilirsiniz.
 
-> **Note for Local Ollama**: If you are using `ollama_local`, be sure to start your Ollama server with CORS permissions enabled:
-> \`\`\`bash
+---
+
+## ⚙️ Yapılandırma ve API Ayarları (Config)
+
+Eklentinin hangi modeli kullanacağını seçmek veya API anahtarlarını girmek için `src/config/config.js` dosyasını favori kod editörünüzde (VS Code vb.) açın:
+
+- Varsayılan sağlayıcıyı ayarlamak için `provider: 'ollama_local'` (veya `oss_cloud`, `openai`) değerini değiştirin.
+- Eğer bulut veya OpenAI kullanacaksanız ilgili `keys:` kısmına anahtarınızı yapıştırın.
+- Yerel (Local) `ollama` sunucunuzdaki model ismini değiştirmek için `models:` altındaki `ollama_local:` karşılığını düzenleyin (Örn: `llama3`, `qwen`, `phi3`).
+
+> ⚠️ **Ollama Kullananlar İçin Çok Önemli Not (CORS Koruması):**
+> Chrome eklentisinin bilgisayarınızdaki Ollama'ya erişebilmesi için Ollama'yı mutlaka CORS yetkisiyle başlatmanız gerekir. Terminalden şu komutla çalıştırın:
+> ```bash
 > OLLAMA_ORIGINS="*" ollama serve
-> \`\`\`
+> ```
 
-## 🎨 UI/UX Highlights
-- **Draggable Panel**: Move the File Mode panel anywhere on your screen.
-- **Minimize & Expand**: Click the chevron (\`^\` / \`v\`) to shrink the panel out of your way when reading.
-- **Markdown Rendering**: Beautiful rendering of AI answers equipped with inline code blocks, bold headings, and lists.
-- **Hover & Click Reactions**: Delightful micro-animations and color changes perfectly blended into GitHub's native style.
+---
 
-## 📄 License
-MIT License
+## 🎨 UI & UX Tasarım Zenginliği
+
+Proje, GitHub'ın kendi koyu Mavi / Gri (Native) arayüz tasarımıyla kusursuz şekilde birleşmek üzere özel CSS kodlarıyla donatılmıştır:
+- Panel **sürüklenebilir** (Draggable), farenizle tutup panel başlığından istediğiniz yere çekebilirsiniz.
+- Okuma alanınızı kapatmaması için sağ üstünden ( _ veya v ikonu ) **küçültülüp (Minimize)** tek bir başlığa sığdırılabilir.
+- Asistandan gelen cevaplar düz metin olarak değil; özel `marked.js` kütüphanesi yardımıyla kalınlık, kod highlightı ve renkli maddeler barındıran tam **Markdown (.md)** estetiği ile okunur.
+- Tıklamalarda, buton hoverlarında ve ekran belirmelerinde yumuşak iOS benzeri **Bounce/Fade animasyonları** kullanılmıştır.
+
+---
+
+## 📄 Lisans
+MIT License - Dilediğiniz gibi kullanabilir ve geliştirebilirsiniz.
