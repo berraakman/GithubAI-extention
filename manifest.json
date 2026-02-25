@@ -1,0 +1,39 @@
+{
+    "manifest_version": 3,
+    "name": "GitHub AI Code Assistant",
+    "version": "1.0.0",
+    "description": "LLM powered Chrome extension for GitHub with modular architecture",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "*://github.com/*",
+        "http://localhost:11434/*",
+        "https://api.openai.com/*",
+        "https://*/*"
+    ],
+    "background": {
+        "service_worker": "src/background.js",
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://github.com/*"
+            ],
+            "css": [
+                "src/ui/styles.css"
+            ],
+            "js": [
+                "src/config/config.js",
+                "src/prompts/prompts.js",
+                "src/dom/extractor.js",
+                "src/ui/marked.min.js",
+                "src/ui/panel.js",
+                "content.js"
+            ]
+        }
+    ]
+}

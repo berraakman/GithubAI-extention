@@ -1,0 +1,153 @@
+.ai-panel-container {
+  position: fixed;
+  top: 100px;
+  right: 24px;
+  width: 340px;
+  background: #ffffff;
+  border: 1px solid #d0d7de;
+  border-radius: 12px;
+  padding: 16px;
+  color: #1f2328;
+  z-index: 99999;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  /* Yumuşatılmış şık gölge */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.ai-panel-container h3 {
+  margin: 0 0 16px 0;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 1px solid #eaeef2;
+  padding-bottom: 14px;
+  color: #0969da;
+  /* GitHub mavi tonu başlık */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-action-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  color: #24292f;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+.ai-action-btn:hover {
+  background: #e9ecef;
+  /* Hover gri ton daha belirgin */
+  border-color: #0969da;
+  /* Hoverda mavi border */
+  color: #0969da;
+  transform: translateY(-1px);
+  /* Yukari dogru zarif hover efekti */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.ai-btn-primary {
+  background: #1f883d;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  justify-content: center;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(31, 136, 61, 0.2);
+}
+
+.ai-btn-primary:hover {
+  background: #1a7f37;
+  color: #ffffff;
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(31, 136, 61, 0.3);
+}
+
+.ai-result-view {
+  margin-top: 18px;
+  font-size: 13.5px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.ai-result-view:empty {
+  margin-top: 0;
+}
+
+/* Gelen metnin (markdown tarzı düz okunur) daha şık hali */
+.ai-result-text {
+  white-space: pre-wrap;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  /* Monospace çıkardık, okuması daha rahat bir font verdik */
+  background: rgba(246, 248, 250, 0.6);
+  color: #24292f;
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid #0969da;
+  /* Sol tarafa vurgu border'ı */
+  line-height: 1.5;
+  margin: 0;
+  word-break: break-word;
+  box-shadow: inset 0 0 0 1px #d0d7de;
+  font-size: 14px;
+}
+
+.ai-loader {
+  color: #0969da;
+  font-weight: 500;
+  text-align: center;
+  padding: 14px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.ai-error {
+  color: #cf222e;
+  background: #ffebe9;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 129, 130, 0.4);
+  font-weight: 500;
+}
+
+.ai-repo-panel {
+  margin: 16px 0 24px 0;
+  padding: 20px;
+  background: #ffffff;
+  color: #1f2328;
+  border: 1px solid #d0d7de;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
