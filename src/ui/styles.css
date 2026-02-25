@@ -96,6 +96,7 @@
 /* Gelen metnin (markdown tarzı düz okunur) daha şık hali */
 .ai-result-text {
   white-space: pre-wrap;
+  /* For fallback */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   /* Monospace çıkardık, okuması daha rahat bir font verdik */
   background: rgba(246, 248, 250, 0.6);
@@ -110,6 +111,66 @@
   box-shadow: inset 0 0 0 1px #d0d7de;
   font-size: 14px;
 }
+
+div.ai-markdown-body {
+  white-space: normal;
+  /* Markdown renders properly */
+}
+
+.ai-markdown-body p {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.ai-markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-markdown-body code {
+  background: rgba(175, 184, 193, 0.3);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, monospace;
+  font-size: 85%;
+  color: #1f2328;
+}
+
+.ai-markdown-body pre {
+  background: #f0f3f6;
+  border-radius: 6px;
+  padding: 12px;
+  overflow: auto;
+  margin: 12px 0;
+  border: 1px solid #d0d7de;
+}
+
+.ai-markdown-body pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: #24292f;
+  font-size: 85%;
+}
+
+.ai-markdown-body ul,
+.ai-markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding-left: 20px;
+}
+
+.ai-markdown-body h1,
+.ai-markdown-body h2,
+.ai-markdown-body h3,
+.ai-markdown-body h4 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1.1em;
+  border-bottom: 1px solid #d0d7de;
+  padding-bottom: 4px;
+}
+
 
 .ai-loader {
   color: #0969da;
